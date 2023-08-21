@@ -21,14 +21,13 @@ class NetToolsApp:
 
         if choice == "Ustaw IP statyczne":
             subprocess_cmd_static(staticCommand)
-        elif choice == "Konfiguracja stanowiska":
+        elif choice == "Ustaw IP DHCP":
             subprocess_cmd_dynamic(dynamicComand)
-            time.sleep(1)
             print(f"Przydzielone IP -> {UserInfo.getIP()} \n"
                   f"Przydzielony MAC -> {UserInfo.getMAC()} \n"
                   f"Nazwa Komputera -> {UserInfo.getHostname()} \n \n")
 
 
 if __name__ == '__main__':
-    app = CLIApp()
+    app = NetToolsApp()
     app.run()

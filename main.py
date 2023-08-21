@@ -19,7 +19,8 @@ class CLIApp:
         choice = self.main_question.ask()
 
         if choice == "NetTools":
-            self.net_tools()
+            net_tools_app = NetToolsApp()
+            net_tools_app.run()
         elif choice == "Konfiguracja stanowiska":
             self.configure_workstation()
         elif choice == "Raporty":
