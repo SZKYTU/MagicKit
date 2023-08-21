@@ -1,5 +1,6 @@
 import questionary
 from NetworkTools.dynamicMode import subprocess_cmd_dynamic
+from NetworkTools.main import NetToolsApp
 
 
 class CLIApp:
@@ -43,6 +44,7 @@ class CLIApp:
 
     def net_tools(self):
         print("Uruchomiono opcję NetTools.")
+        NetToolsApp.run()
 
     def install_packages(self):
         print("Uruchomiono opcję Instalacja pakietów.")
