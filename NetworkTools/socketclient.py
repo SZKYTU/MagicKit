@@ -6,7 +6,7 @@ from NetworkTools.pcinfomodule import UserInfo
 from NetworkTools.config import socketHost, socketPort
 
 
-def clientJsonSend():
+def clientJsonSend(ip, hostname, mac):
     global json, socket
     UserInfoJS = {
         "IP": UserInfo.getIP(),

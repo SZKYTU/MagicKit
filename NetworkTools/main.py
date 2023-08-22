@@ -1,9 +1,11 @@
 from unittest import result
 import time
+import os
 import questionary
 from NetworkTools.pcinfomodule import UserInfo
 from NetworkTools.staticMode import subprocess_cmd_static, staticCommand
 from NetworkTools.dynamicMode import subprocess_cmd_dynamic, dynamicComand
+from NetworkTools.socketclient import clientJsonSend
 
 
 class NetToolsApp:
@@ -20,12 +22,41 @@ class NetToolsApp:
         choice = self.main_question.ask()
 
         if choice == "Ustaw IP statyczne":
+            os.system('cls')
             subprocess_cmd_static(staticCommand)
+
         elif choice == "Ustaw IP DHCP":
             subprocess_cmd_dynamic(dynamicComand)
-            print(f"Przydzielone IP -> {UserInfo.getIP()} \n"
-                  f"Przydzielony MAC -> {UserInfo.getMAC()} \n"
-                  f"Nazwa Komputera -> {UserInfo.getHostname()} \n \n")
+
+            ip = UserInfo.getIP()
+            mac = UserInfo.getMAC()
+            hostname = UserInfo.getHostname()
+
+            os.system('cls')
+            time.sleep(1)
+
+            print(f"Przydzielone IP -> {ip} \n"
+                  f"Przydzielony MAC -> {mac} \n"
+                  f"Nazwa Komputera -> {hostname} \n \n")
+
+            second_question = questionary.select(
+                "Sprawdz dane, i zdecyduj czy wysłać je do arkusza",
+                choices=[
+                    "TAK",
+                    "NIE",]
+            )
+
+            choice = second_question.ask()
+
+            if choice == "TAK":
+                clientJsonSend(ip, hostname, mac)
+                print("Przesłano dane do formularza")
+            elif choice == "NIE":
+                self.main_question_loop()
+
+    def main_question_loop(self):
+        while True:
+            self.run()
 
 
 if __name__ == '__main__':
