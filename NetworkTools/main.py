@@ -6,6 +6,7 @@ from NetworkTools.pcinfomodule import UserInfo
 from NetworkTools.staticMode import subprocess_cmd_static, staticCommand
 from NetworkTools.dynamicMode import subprocess_cmd_dynamic, dynamicComand
 from NetworkTools.socketclient import clientJsonSend
+from main import CLIApp
 
 
 class NetToolsApp:
@@ -33,7 +34,7 @@ class NetToolsApp:
             hostname = UserInfo.getHostname()
 
             os.system('cls')
-            time.sleep(1)
+            time.sleep(2)
 
             print(f"Przydzielone IP -> {ip} \n"
                   f"Przydzielony MAC -> {mac} \n"
@@ -45,6 +46,8 @@ class NetToolsApp:
                     "TAK",
                     "NIE",]
             )
+        elif choice == "Wyjscie":
+            CLIApp.run()
 
             choice = second_question.ask()
 
