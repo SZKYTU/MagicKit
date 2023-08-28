@@ -1,6 +1,16 @@
+
+
+import os
+import time
 import questionary
-from NetworkTools.dynamicMode import subprocess_cmd_dynamic
-from NetworkTools.main import NetToolsApp
+from NetworkTools.pcinfomodule import UserInfo
+from NetworkTools.socketclient import clientJsonSend
+from NetworkTools.staticMode import staticCommand
+from NetworkTools.dynamicMode import subprocess_cmd_dynamic, dynamicComand
+
+from NetworkTools.staticMode import subprocess_cmd_static
+
+from NetworkTools import set_dynamic_ip, set_static_ip
 
 
 class CLIApp:
@@ -19,8 +29,7 @@ class CLIApp:
         choice = self.main_question.ask()
 
         if choice == "NetTools":
-            net_tools_app = NetToolsApp()
-            net_tools_app.run()
+            self.net_tools()
         elif choice == "Konfiguracja stanowiska":
             self.configure_workstation()
         elif choice == "Raporty":
@@ -44,8 +53,23 @@ class CLIApp:
             self.domain_actions()
 
     def net_tools(self):
-        print("Uruchomiono opcję NetTools.")
-        NetToolsApp.run()
+        nettools_question = questionary.select(
+            "Wybierz opcję:",
+            choices=[
+                "Ustaw IP statyczne",
+                "Ustaw IP DHCP",
+                "Wyjscie",]
+        )
+        choise = nettools_question.ask()
+
+        if choise == "Ustaw IP statyczne":
+            os.system('cls')
+            set_static_ip()
+
+        elif choise == "Ustaw IP DHCP":
+            set_dynamic_ip()
+
+        # NetToolsApp.run()
 
     def install_packages(self):
         print("Uruchomiono opcję Instalacja pakietów.")
