@@ -2,6 +2,7 @@ import subprocess
 import socket
 import wmi
 
+
 class UserInfo():  # wrap
     def getIP():
         IP = socket.gethostbyname(socket.gethostname())
@@ -12,10 +13,11 @@ class UserInfo():  # wrap
         return Hostname
 
     def getMAC():
-        print(subprocess.call(["ipconfig", "/release"], shell=True))
-        print(subprocess.call(["ipconfig", "/renew"], shell=True))
+        # print(subprocess.call(["ipconfig", "/release"], shell=True))
+        # print(subprocess.call(["ipconfig", "/renew"], shell=True))
+        subprocess.call(["ipconfig", "/release"], shell=True)
+        subprocess.call(["ipconfig", "/renew"], shell=True)
         wmiObj = wmi.WMI()
         temp = wmiObj.Win32_NetworkAdapterConfiguration(IPEnabled=True)[0]
         mac = temp.MACAddress
         return mac
-        

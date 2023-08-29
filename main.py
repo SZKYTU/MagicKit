@@ -3,14 +3,8 @@
 import os
 import time
 import questionary
-from NetworkTools.pcinfomodule import UserInfo
-from NetworkTools.socketclient import clientJsonSend
-from NetworkTools.staticMode import staticCommand
-from NetworkTools.dynamicMode import subprocess_cmd_dynamic, dynamicComand
 
-from NetworkTools.staticMode import subprocess_cmd_static
-
-from NetworkTools import set_dynamic_ip, set_static_ip
+from NetworkTools import NetToolsApp
 
 
 class CLIApp:
@@ -64,10 +58,11 @@ class CLIApp:
 
         if choise == "Ustaw IP statyczne":
             os.system('cls')
-            set_static_ip()
+            NetToolsApp.set_static_ip()
 
         elif choise == "Ustaw IP DHCP":
-            set_dynamic_ip()
+            app_instance = NetToolsApp()
+            app_instance.set_dynamic_ip()
 
         # NetToolsApp.run()
 

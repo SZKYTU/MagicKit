@@ -1,4 +1,3 @@
-from unittest import result
 import time
 import os
 import questionary
@@ -10,25 +9,22 @@ from NetworkTools.socketclient import clientJsonSend
 
 class NetToolsApp():
     def __init__(self):
-        self.static_mode = set_static_ip()  # FIXME:
-        pass
+        self.ip = UserInfo.getIP()
+        self.mac = UserInfo.getMAC()
+        self.hostname = UserInfo.getHostname()
 
     def set_static_ip():
         subprocess_cmd_static(staticCommand)
 
-    def set_dynamic_ip():
+    def set_dynamic_ip(self):
         subprocess_cmd_dynamic(dynamicComand)
-
-        ip = UserInfo.getIP()
-        mac = UserInfo.getMAC()
-        hostname = UserInfo.getHostname()
 
         os.system('cls')
         time.sleep(2)
 
-        print(f"Przydzielone IP -> {ip} \n"
-              f"Przydzielony MAC -> {mac} \n"
-              f"Nazwa Komputera -> {hostname} \n \n")
+        print(f"Przydzielone IP -> {self.ip} \n"
+              f"Przydzielony MAC -> {self.mac} \n"
+              f"Nazwa Komputera -> {self.hostname} \n \n")
 
         second_question = questionary.select(
             "Sprawdz dane, i zdecyduj czy wysłać je do arkusza",
@@ -39,11 +35,7 @@ class NetToolsApp():
         choice = second_question.ask()
 
         if choice == "TAK":
-            clientJsonSend(ip, hostname, mac)
+            clientJsonSend(self.ip, self.hostname, self.mac)
             print("Przesłano dane do formularza")
         elif choice == "NIE":
-            print('nie')
-
-# if __name__ == '__main__':
-#     app = NetToolsApp()
-#     app.run()
+            print('nie')  # :TODO
