@@ -1,10 +1,10 @@
-import time
 import os
+import time
 import questionary
 from NetworkTools.pcinfomodule import UserInfo
+from NetworkTools.socketclient import clientJsonSend
 from NetworkTools.staticMode import subprocess_cmd_static, staticCommand
 from NetworkTools.dynamicMode import subprocess_cmd_dynamic, dynamicComand
-from NetworkTools.socketclient import clientJsonSend
 
 
 class NetToolsApp():

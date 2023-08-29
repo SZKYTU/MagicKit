@@ -5,6 +5,7 @@ import time
 import questionary
 
 from NetworkTools import NetToolsApp
+from AppInstall import AppInstall
 
 
 class CLIApp:
@@ -61,13 +62,11 @@ class CLIApp:
             NetToolsApp.set_static_ip()
 
         elif choise == "Ustaw IP DHCP":
-            app_instance = NetToolsApp()
-            app_instance.set_dynamic_ip()
-
-        # NetToolsApp.run()
+            NetToolsApp().set_dynamic_ip()
 
     def install_packages(self):
         print("Uruchomiono opcję Instalacja pakietów.")
+        AppInstall().run()
 
     def domain_actions(self):
         print("Uruchomiono opcję Działania na domenie.")
