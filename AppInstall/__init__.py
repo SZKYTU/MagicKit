@@ -1,6 +1,8 @@
 import subprocess
 import questionary
 import os
+# from menu_menager import CLImenager
+# from main import CLIApp
 
 
 class AppInstall():
@@ -11,7 +13,7 @@ class AppInstall():
                 "Pakiety dla laptopow DELL",
                 "Pakiety dla laptopow HP",
                 "Pakiety dla komputerów stacjonarnych",
-                "Wyjście"
+                "Wyjście"  # ::FIXME
             ]
         )
 
@@ -25,7 +27,7 @@ class AppInstall():
         elif choice == "Pakiety dla komputerów stacjonarnych":
             self.install_pc_app()
         elif choice == "Wyjście":
-            self.office_tools()
+            pass
 
     def install_dell_app(self):
         os.system('cls')
