@@ -4,6 +4,7 @@ import questionary
 
 from NetworkTools import NetToolsApp
 from AppInstall import AppInstall
+from DomainMenager import DomainManagerApp
 
 
 class CLIApp:
@@ -67,7 +68,7 @@ class CLIApp:
         AppInstall().run()
 
     def domain_actions(self):
-        print("Uruchomiono opcję Działania na domenie.")
+        DomainManagerApp().run()
 
     def reports(self):
         print("Uruchomiono opcję Raporty.")

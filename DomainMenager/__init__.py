@@ -1,38 +1,28 @@
 import subprocess
-import time
+import questionary
+import os
+from DomainMenager.domain_menager import DomainManager
 
 
-class DomainManager:
-    def __init__(self, new_computer_name, domain_name):
-        self.new_computer_name = new_computer_name
-        self.domain_name = domain_name
+class DomainManagerApp:
+    def __init__(self):
+        self.main_question = questionary.select(
+            "Wybierz opcję:",
+            choices=[
+                "Dodaj do domey tf1",
+                "Zmien nazwe komputera",
+                "Wyjscie",
+            ]
+        )
 
-    def rename_computer(self):
-        rename_command = f'WMIC computersystem where caption="%computername%" rename {self.new_computer_name}'
-        subprocess.run(rename_command, shell=True, check=True)
+    def run(self):
+        choice = self.main_question.ask()
 
-        try:
-            subprocess.run(rename_command, shell=True, check=True)
-            print("Zmiana nazwy komputera została zakończona pomyślnie.")
-        except subprocess.CalledProcessError:
-            print("Wystąpił błąd podczas zmiany nazwy komputera.")
-
-    def join_domain(self):
-        domain_command = f'@powershell Add-Computer tf1.pl'
-
-        try:
-            subprocess.run(domain_command, shell=True, check=True)
-            print("Wpinanie do domeny przebiegło pomyślnie.")
-        except subprocess.CalledProcessError:
-            print("Wystąpił błąd podczas wpinania do domeny.")
-
-
-# :FIXME
-new_computer_name = "autowpiecie"
-domain_name = "-"  # :TODO
-computer_manager = DomainManager(new_computer_name, domain_name)
-
-
-computer_manager.join_domain()
-time.sleep(2)
-computer_manager.rename_computer()
+        if choice == "Dodaj do domey tf1":
+            DomainManager().join_domain()
+        elif choice == "Zmien nazwe komputera":
+            computer_name = input("Podaj nazwe komputera")
+            DomainManager(computer_name).rename_computer()
+            os.system("shutdown /r /t 0")
+        elif choice == "Wyjscie":
+            pass  # :FIXME
