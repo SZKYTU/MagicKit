@@ -5,6 +5,7 @@ import questionary
 from NetworkTools import NetToolsApp
 from AppInstall import AppInstall
 from DomainMenager import DomainManagerApp
+from OfficeTools import OfficeToolsApp
 
 
 class CLIApp:
@@ -74,7 +75,7 @@ class CLIApp:
         print("Uruchomiono opcję Raporty.")
 
     def office_tools(self):
-        print("Uruchomiono opcję OfficeTools.")
+        OfficeToolsApp().run()
 
 
 if __name__ == '__main__':

@@ -1,4 +1,3 @@
-import subprocess
 import questionary
 import os
 from DomainMenager.domain_menager import DomainManager
