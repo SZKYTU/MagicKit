@@ -1,5 +1,3 @@
-import subprocess
-import questionary
 import os
 import win32api
 import win32con
