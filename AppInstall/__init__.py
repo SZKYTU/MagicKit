@@ -13,7 +13,7 @@ class AppInstall():
                 "Pakiety dla laptopow DELL",
                 "Pakiety dla laptopow HP",
                 "Pakiety dla komputerów stacjonarnych",
-                "Wyjście"  # ::FIXME
+                "Wyjście"
             ]
         )
 
@@ -27,7 +27,7 @@ class AppInstall():
         elif choice == "Pakiety dla komputerów stacjonarnych":
             self.install_pc_app()
         elif choice == "Wyjście":
-            pass
+            return "back"
 
     def install_dell_app(self):
         os.system('cls')

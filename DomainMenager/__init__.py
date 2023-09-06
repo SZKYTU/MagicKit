@@ -24,4 +24,4 @@ class DomainManagerApp:
             DomainManager(computer_name).rename_computer()
             os.system("shutdown /r /t 0")
         elif choice == "Wyjscie":
-            pass  # :FIXME
+            return "back"

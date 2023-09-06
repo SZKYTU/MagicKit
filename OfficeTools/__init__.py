@@ -28,4 +28,4 @@ class OfficeToolsApp:
         elif choice == "Office 2021":
             OfficeTools().run_office2021()
         elif choice == "Wyjscie":
-            pass  # :FIXME
+            return "back"

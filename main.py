@@ -16,28 +16,37 @@ class CLIApp:
                 "NetTools",
                 "Konfiguracja stanowiska",
                 "Raporty",
-                "OfficeTools"
+                "OfficeTools",
+                "Zakończ"
             ]
         )
 
     def run(self):
-        choice = self.main_question.ask()
+        while True:
+            choice = self.main_question.ask()
 
-        if choice == "NetTools":
-            self.net_tools()
-        elif choice == "Konfiguracja stanowiska":
-            self.configure_workstation()
-        elif choice == "Raporty":
-            self.reports()
-        elif choice == "OfficeTools":
-            self.office_tools()
+            if choice == "NetTools":
+                if self.net_tools() == "back":  # allows you to return to the main questionnaire
+                    continue
+            elif choice == "Konfiguracja stanowiska":
+                if self.configure_workstation() == "back":
+                    continue
+            elif choice == "Raporty":
+                if self.reports() == "back":
+                    continue
+            elif choice == "OfficeTools":
+                if self.office_tools() == "back":
+                    continue
+            elif choice == "Zakończ":
+                break
 
     def configure_workstation(self):
         configure_question = questionary.select(
             "Wybierz opcję konfiguracji:",
             choices=[
                 "Instalacja pakietów",
-                "Działania na domenie"
+                "Działania na domenie",
+                "Wyjście"
             ]
         )
         configure_choice = configure_question.ask()
@@ -46,6 +55,8 @@ class CLIApp:
             self.install_packages()
         elif configure_choice == "Działania na domenie":
             self.domain_actions()
+        elif configure_choice == "Wyjście":
+            return "back"
 
     def net_tools(self):
         nettools_question = questionary.select(
@@ -62,20 +73,25 @@ class CLIApp:
             NetToolsApp.set_static_ip()
 
         elif choise == "Ustaw IP DHCP":
+            os.system('cls')
             NetToolsApp().set_dynamic_ip()
 
     def install_packages(self):
         print("Uruchomiono opcję Instalacja pakietów.")
-        AppInstall().run()
+        os.system('cls')
+        return AppInstall().run()
 
     def domain_actions(self):
-        DomainManagerApp().run()
+        os.system('cls')
+        return DomainManagerApp().run()
 
     def reports(self):
+        os.system('cls')
         print("Uruchomiono opcję Raporty.")
 
     def office_tools(self):
-        OfficeToolsApp().run()
+        os.system('cls')
+        return OfficeToolsApp().run()
 
 
 if __name__ == '__main__':
